@@ -1,0 +1,99 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object MemoContent: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    TextSettings.WordWrap = True
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 360.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Viewport.Width = 636.000000000000000000
+    Viewport.Height = 356.000000000000000000
+  end
+  object Panel1: TPanel
+    Align = Top
+    Size.Width = 640.000000000000000000
+    Size.Height = 120.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    object EditParamspattern: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Text = 'Madonna'
+      Position.X = 72.000000000000000000
+      Position.Y = 40.000000000000000000
+      object LabelParamspattern: TLabel
+        Position.Y = -16.000000000000000000
+        TextSettings.WordWrap = False
+        Text = 'Params.pattern'
+        TabOrder = 0
+      end
+    end
+    object Button1: TButton
+      Position.X = 192.000000000000000000
+      Position.Y = 40.000000000000000000
+      TabOrder = 2
+      Text = 'Execute'
+      OnClick = Button1Click
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://www.songsterr.com/a/ra'
+    Params = <
+      item
+        Name = 'pattern'
+      end>
+    Left = 448
+    Top = 48
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <
+      item
+        Name = 'pattern'
+        Value = 'Madonna'
+      end>
+    Resource = 'songs.json'
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 448
+    Top = 112
+  end
+  object RESTResponse1: TRESTResponse
+    ContentType = 'application/json'
+    Left = 448
+    Top = 176
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkControlToFieldContent: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RESTResponse1
+      FieldName = 'Content'
+      Control = MemoContent
+      Track = False
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RESTRequest1
+      FieldName = 'Params.pattern'
+      Control = EditParamspattern
+      Track = False
+    end
+  end
+end

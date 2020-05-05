@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2994026C-9137-4A4F-B742-B88D5E81B48F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RESTClient\RESTClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RESTClient_LiveBindings\RESTClient_LiveBindings.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RESTClient">
+        <MSBuild Projects="RESTClient\RESTClient.dproj"/>
+    </Target>
+    <Target Name="RESTClient:Clean">
+        <MSBuild Projects="RESTClient\RESTClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RESTClient:Make">
+        <MSBuild Projects="RESTClient\RESTClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RESTClient_LiveBindings">
+        <MSBuild Projects="RESTClient_LiveBindings\RESTClient_LiveBindings.dproj"/>
+    </Target>
+    <Target Name="RESTClient_LiveBindings:Clean">
+        <MSBuild Projects="RESTClient_LiveBindings\RESTClient_LiveBindings.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RESTClient_LiveBindings:Make">
+        <MSBuild Projects="RESTClient_LiveBindings\RESTClient_LiveBindings.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RESTClient;RESTClient_LiveBindings"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RESTClient:Clean;RESTClient_LiveBindings:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RESTClient:Make;RESTClient_LiveBindings:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
